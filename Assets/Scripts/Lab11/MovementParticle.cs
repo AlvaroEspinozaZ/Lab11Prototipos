@@ -17,27 +17,24 @@ namespace MySystemP
             _particle.ChangeColor(_renderer, _material);
             DirectionRandom();
         }
-
+        private void OnEnable()
+        {
+            
+        }
         void Update()
         {
             transform.position =_particle.Move(transform.position,direction,velocity);
         }
 
-
-
-
-
-
-
-
         public void DirectionRandom()
         {
+           
             direction = randomDirection.RandomVector();
         }
-        public void Hide()
+        public void Hide(float timeToHide, Transform posInit)
         {
-         
-            gameObject.SetActive(false);
+            StartCoroutine(MytimeToHide(timeToHide, posInit));
+           
         }
         public void Active()
         {
@@ -67,6 +64,14 @@ namespace MySystemP
             {
                 return Random.Range(minAxis, maxAxis);
             }
+        }
+        IEnumerator MytimeToHide(float time, Transform posInit)
+        {
+            Active();
+            SetPositionInit(posInit);
+
+            yield return new WaitForSecondsRealtime(time);
+            gameObject.SetActive(false);
         }
     }
 

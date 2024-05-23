@@ -13,15 +13,16 @@ namespace MySystemP
         public Color colors;
         public Texture imagen;
         public int cantObjects=200;
+        private float _timeToLive=2;
 
         private void Start()
         {
-            for(int i = 0; i < cantObjects; i++)
+            for (int i = 0; i < cantObjects; i++)
             {
                 MovementParticle tmp = Instantiate(movementParticle);
                 tmp._particle.Sprite = imagen;
                 tmp._particle.Color = colors;
-                
+                tmp.Hide(_timeToLive, transform);
                 listParticles.Add(tmp) ;
             }
         }
